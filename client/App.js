@@ -9,12 +9,12 @@ export default function App() {
     //   <Text>Open up App.js to start working on your app!</Text> 
     // </View>
     // <SimpleForm />
-    <View>
-      <SimpleForm />
-      <BottomNaviComp />
-    </View>
+    // <View>
+    //   <SimpleForm />
+    //   <BottomNaviComp />
+    // </View>
     // <SimpleForm />
-    // <BottomNaviComp />
+    <BottomNaviComp />
   );
 }
 
