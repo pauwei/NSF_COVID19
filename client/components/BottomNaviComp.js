@@ -3,6 +3,7 @@ import { BottomNavigation, Text } from 'react-native-paper';
 import SimpleForm from './forms/SimpleForm'
 import CardComp from './forms/CardComp'
 import TableComp from './forms/TableComp'
+import WebComp from './forms/WebComp'
 
 const MusicRoute = () => <Text>Music</Text>;
 
@@ -25,7 +26,7 @@ export default class BottomNaviComp extends React.Component {
   _renderScene = BottomNavigation.SceneMap({
     home: CardComp,
     form: SimpleForm,
-    infomation: TableComp,
+    infomation: WebComp,
   });
 
   render() {
