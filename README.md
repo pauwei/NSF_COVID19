@@ -11,7 +11,7 @@ Follow the instructions below to run the project
  1. Make sure to have [Node.js](https://nodejs.org/en/) installed. "Current" version is the most updated version while "LTS" version is for long term support which provides greater security and stability
  2. Clone the repository onto your local machine. [How to clone git repository?](https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository)
  3. Navigate to the repository and install expo-cli on command line. `npm install -g expo-cli` This will be used to run the mobile app. We are installing this package globally so we can use the command line interface
- 4. Install package dependencies. You can do this manually by executing the following commands: `npm i`, `cd client`, and `npm i` or you can run the script to install all dependencies `npm run-script install-all`
+ 4. Install package dependencies. You can do this manually by executing the following commands: `npm i`, `cd client`, and `npm i` or you can run the script to install all dependencies `npm i` and `npm run-script install-all`
  5. To run the project, simply use `npm run-script client` which will run expo for the frontend of the project
 
 

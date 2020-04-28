@@ -1,9 +1,10 @@
 import React from 'react';
-import Entry from './screens/entry.js'
+import Entry from './screens/entry'
+import Onboarding from './screens/Onboarding'
 
 export default class App extends React.Component {
   render(){
-    return <Entry />;
+    return <Onboarding />;
   }
 }
 

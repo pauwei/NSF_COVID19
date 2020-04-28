@@ -20,19 +20,6 @@ export default class Entry extends React.Component{
         );
     }
 
-
-
-
-    // render(){
-    //     return (
-    //         <LinearGradient colors = { primaryGradientArray } style =  {styles.container}>
-    //             <StatusBar barStyle = "light-content" />
-    //             <View style = {styles.centered}>
-    //                 <Header title = {headerTitle} />
-    //             </View>
-    //         </LinearGradient>
-    //     );
-    // }
 }
 
 const styles = StyleSheet.create({
