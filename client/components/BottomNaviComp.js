@@ -2,8 +2,9 @@ import * as React from 'react';
 import { BottomNavigation, Text } from 'react-native-paper';
 import SimpleForm from './forms/SimpleForm'
 import CardComp from './forms/CardComp'
-import TableComp from './forms/TableComp'
+import InfoMapComp from './forms/InfoMapComp'
 import WebComp from './forms/WebComp'
+import Login from './auth/Login'
 
 const MusicRoute = () => <Text>Music</Text>;
 
@@ -24,9 +25,9 @@ export default class BottomNaviComp extends React.Component {
   _handleIndexChange = index => this.setState({ index });
 
   _renderScene = BottomNavigation.SceneMap({
-    home: CardComp,
-    form: SimpleForm,
-    infomation: WebComp,
+    home: Login,
+    form: WebComp,
+    infomation: InfoMapComp,
   });
 
   render() {

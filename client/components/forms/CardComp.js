@@ -5,15 +5,16 @@ const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
 
 const CardComp = () => (
   <Card>
-    <Card.Title title="Card Title" subtitle="Card Subtitle" left={LeftContent} />
+    <Card.Title title="" subtitle="" left={LeftContent} />
     <Card.Content>
-      <Title>Card title</Title>
-      <Paragraph>Card content</Paragraph>
+      <Title>NSF_COVID19</Title>
+      <Paragraph></Paragraph>
     </Card.Content>
-    <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
+    <Card.Cover source={ require('../../assets/img/feeling.png') } 
+    style={{ height: 250,   }}/>
     <Card.Actions>
-      <Button>Cancel</Button>
-      <Button>Ok</Button>
+      <Button>More Information</Button>
+      {/* <Button>Ok</Button> */}
     </Card.Actions>
   </Card>
 );
