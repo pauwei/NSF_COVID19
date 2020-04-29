@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "client",
-    "slug": "client",
+    "name": "test3",
+    "slug": "test3",
     "platforms": [
       "ios",
       "android",
