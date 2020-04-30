@@ -4,7 +4,7 @@ import SimpleForm from './forms/SimpleForm'
 import CardComp from './forms/CardComp'
 import InfoMapComp from './forms/InfoMapComp'
 import WebComp from './forms/WebComp'
-import Login from './auth/Login'
+import LoginComp from './forms/LoginComp'
 
 const MusicRoute = () => <Text>Music</Text>;
 
@@ -25,7 +25,7 @@ export default class BottomNaviComp extends React.Component {
   _handleIndexChange = index => this.setState({ index });
 
   _renderScene = BottomNavigation.SceneMap({
-    home: Login,
+    home: LoginComp,
     form: WebComp,
     infomation: InfoMapComp,
   });
