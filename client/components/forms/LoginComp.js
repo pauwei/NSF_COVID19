@@ -109,7 +109,8 @@ validateInput = () => {
                         <View style={{ padding: 5 }} >
                             <Button
                                 mode="contained"
-                                onPress={() => this.login()}
+                                // onPress={() => this.login()}
+                                onPress={() =>  this.props.navigation.navigate('HomePage')}
                                 style={{ justifyContent: 'center' }}
                             >
                                 Login
@@ -121,7 +122,7 @@ validateInput = () => {
                         <View style={{ padding: 5 }} >
                             <Button
                                 mode="outlined"
-                                onPress={() => navigate('Register')}
+                                onPress={() =>  this.props.navigation.navigate('RegisterPage')}
                                 style={{ justifyContent: 'center' }}
                             >
                                 Create new account
