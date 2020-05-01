@@ -1,12 +1,9 @@
 import React from 'react';
-import Entry from './screens/entry'
-import Onboarding from './screens/Onboarding'
 import GPS from './components/gps-tracking'
 
 export default class App extends React.Component {
   render(){
     return <GPS />
-    //return <Onboarding />;
   }
 }
 
