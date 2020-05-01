@@ -53,68 +53,149 @@ export default class PushNotification extends Component {
   onSubmit() {
         const localNotification0 = {
           sound: 'default',  
-          title: 'done!',
-          body: 'done!',
+          title: 'Notification!',
+          body: 'Notification!',
           _displayInForeground: true,        
-        };
-
-        let not0 = new Date(2020, 3, 28, 19, 41, 0);
-        not0 = Date.parse(not0);
-
-        const schedulingOptions0 = {
-          // time: not0,  
-          // time: (new Date()).getTime() + 2000,
-          // repeat: 'minute',
         };
 
         const localNotification1 = {
           sound: 'default',  
-          title: 'done!',
-          body: 'done!',
+          title: 'Notification!',
+          body: 'Notification!',
           _displayInForeground: true,        
         };
 
-        let not1 = new Date(2020, 3, 28, 19, 41, 30);
+        let not0 = new Date(2020, 4, 3, 10, 00, 00);
+        not0 = Date.parse(not0);
+        let not1 = new Date(2020, 4, 4, 10, 00, 00);
         not1 = Date.parse(not1);
+        let not2 = new Date(2020, 4, 5, 10, 00, 00);
+        not2 = Date.parse(not2);
+        let not3 = new Date(2020, 4, 6, 10, 00, 00);
+        not3 = Date.parse(not3);
+        let not4 = new Date(2020, 4, 7, 10, 00, 00);
+        not4 = Date.parse(not4);
+        let not5 = new Date(2020, 4, 8, 10, 00, 00);
+        not5 = Date.parse(not5);
+        let not6 = new Date(2020, 4, 9, 10, 00, 00);
+        not6 = Date.parse(not6);
 
+        let not10 = new Date(2020, 5, 3, 20, 00, 00);
+        not10 = Date.parse(not10);
+        let not11 = new Date(2020, 5, 4, 20, 00, 00);
+        not11 = Date.parse(not11);
+        let not12 = new Date(2020, 5, 5, 20, 00, 00);
+        not12 = Date.parse(not12);
+        let not13 = new Date(2020, 5, 6, 20, 00, 00);
+        not13 = Date.parse(not13);
+        let not14 = new Date(2020, 5, 7, 20, 00, 00);
+        not14 = Date.parse(not14);
+        let not15 = new Date(2020, 5, 8, 20, 00, 00);
+        not15 = Date.parse(not15);
+        let not16 = new Date(2020, 5, 9, 20, 00, 00);
+        not16 = Date.parse(not16);
+
+        const schedulingOptions0 = {
+          time: not0,  
+        };
         const schedulingOptions1 = {
-          // time: not1,  
-          time: (new Date()).getTime() + 2000,
-          // repeat: 'minute',
+          time: not1,  
+        };
+        const schedulingOptions2 = {
+          time: not2,  
+        };
+        const schedulingOptions3 = {
+          time: not3,  
+        };
+        const schedulingOptions4 = {
+          time: not4,  
+        };
+        const schedulingOptions5 = {
+          time: not5,  
+        };
+        const schedulingOptions6 = {
+          time: not6,  
         };
 
-        // Notifications show only when app is not active.
-        // (ie. another app being used or device's screen is locked)
+        const schedulingOptions10 = {
+          time: not10,  
+        };
+        const schedulingOptions11 = {
+          time: not11,  
+        };
+        const schedulingOptions12 = {
+          time: not12,  
+        };
+        const schedulingOptions13 = {
+          time: not13,  
+        };
+        const schedulingOptions14 = {
+          time: not14,  
+        };
+        const schedulingOptions15 = {
+          time: not15,  
+        };
+        const schedulingOptions16 = {
+          time: not16,  
+        };
+
         Notifications.scheduleLocalNotificationAsync(
             localNotification0, schedulingOptions0
         );
         Notifications.scheduleLocalNotificationAsync(
-            localNotification1, schedulingOptions1
+            localNotification0, schedulingOptions1
         );
+        Notifications.scheduleLocalNotificationAsync(
+            localNotification0, schedulingOptions2
+        );
+        Notifications.scheduleLocalNotificationAsync(
+            localNotification0, schedulingOptions3
+        );
+        Notifications.scheduleLocalNotificationAsync(
+            localNotification0, schedulingOptions4
+        );
+        Notifications.scheduleLocalNotificationAsync(
+            localNotification0, schedulingOptions5
+        );
+        Notifications.scheduleLocalNotificationAsync(
+            localNotification0, schedulingOptions6
+        );
+
+        Notifications.scheduleLocalNotificationAsync(
+            localNotification0, schedulingOptions10
+        );
+        Notifications.scheduleLocalNotificationAsync(
+            localNotification0, schedulingOptions11
+        );
+        Notifications.scheduleLocalNotificationAsync(
+            localNotification0, schedulingOptions12
+        );
+        Notifications.scheduleLocalNotificationAsync(
+            localNotification0, schedulingOptions13
+        );
+        Notifications.scheduleLocalNotificationAsync(
+            localNotification0, schedulingOptions14
+        );
+        Notifications.scheduleLocalNotificationAsync(
+            localNotification0, schedulingOptions15
+        );
+        Notifications.scheduleLocalNotificationAsync(
+            localNotification0, schedulingOptions16
+        );
+
     }
 
     handleNotification() {
-        //console.warn('ok! got your notif');
-        // console.warn((new Date()).getTime());
-        let not0 = new Date(2020, 3, 28, 19, 41);
-        not0 = Date.parse(not0);
-        // console.warn(new Date(2020, 4, 28, 19, 18));
-        // console.warn(not0);
-        console.warn("Received notification");
-
+        // console.warn("Received notification");
     }
 
     async componentDidMount() {
-        // We need to ask for Notification permissions for ios devices
         let result = await Permissions.askAsync(Permissions.NOTIFICATIONS);
 
         if (Constants.isDevice && result.status === 'granted') {
             console.log('Notification permissions granted.')
         }
 
-        // If we want to do something with the notification when the app
-        // is active, we need to listen to notification events and 
-        // handle them in a callback
         Notifications.addListener(this.handleNotification);
     }
 
