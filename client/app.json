@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "test3",
-    "slug": "test3",
+    "name": "Notification",
+    "slug": "Notification",
     "platforms": [
       "ios",
       "android",
