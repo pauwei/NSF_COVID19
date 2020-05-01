@@ -1,9 +1,11 @@
 import React from 'react';
 import GPS from './components/gps-tracking'
+import PushNotification from './components/PushNotfication'
 
 export default class App extends React.Component {
   render(){
     return <GPS />
+    //return <PushNotification />
   }
 }
 
@@ -29,3 +31,4 @@ export default class App extends React.Component {
 //     justifyContent: 'center',
 //   },
 // });
+
