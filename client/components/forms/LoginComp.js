@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { View ,StyleSheet,Image  } from 'react-native';
 import { Button,TextInput,Surface,Text, Card, Title, Paragraph } from 'react-native-paper';
-import Firebase from '../auth/Firebase';
-import { navigate, resetToScreen } from '../../Services/navigation.service'
 import NotifyService from '../../Services/notify.service';
 import { IsEmail, IsPassword } from '../../Utils/validator.utils';
 

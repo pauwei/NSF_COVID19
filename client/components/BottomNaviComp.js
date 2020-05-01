@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { BottomNavigation, Text } from 'react-native-paper';
-import SimpleForm from './forms/SimpleForm'
 import CardComp from './forms/CardComp'
 import InfoMapComp from './forms/InfoMapComp'
 import WebComp from './forms/WebComp'
