@@ -21,20 +21,24 @@ const firebaseConfig = {
 };
 
 export default class GPS extends React.Component {
-
+    constructor() {
+        super();
+        console.ignoredYellowBox = [ 'Setting a timer' ];
+    }
     onPress = async() => {
         firebase.initializeApp(firebaseConfig);
 
         //Saving the user to async storage
-        await AsyncStorage.setItem('currentUser', JSON.stringify("paulweizhang@gmail.com"))
-            .then( () => {
-                console.log('It was saved successfully')
-            })
-            .catch( () => {
-                console.log('There was an error saving the user')
-            });
+        // await AsyncStorage.setItem('currentUser', JSON.stringify("paulweizhang@gmail.com"))
+        //     .then( () => {
+        //         console.log('It was saved successfully')
+        //     })
+        //     .catch( () => {
+        //         console.log('There was an error saving the user')
+        //     });
 
         //Enabling location
+        //console.log("Enabling Location");
         this._enableLocationAsync();
     }
 
@@ -47,9 +51,11 @@ export default class GPS extends React.Component {
             const permissionStatus = await Location.getProviderStatusAsync();
             const newStatus = permissionStatus.locationServicesEnabled;
 
+            //Navigation
+            const { navigation } = this.props;
+
             //if phone location is disabled
             if (!newStatus){
-                //const { navigation } = this.props;
                 Alert.alert(
                     "Error",
                     "Please Turn On Your Location",
@@ -68,19 +74,19 @@ export default class GPS extends React.Component {
                     this.setState({
                         errorMessage: "Permission to access location was denied"
                     });
-                    //navigation.navigate("App");     //Go to register/login page
+                    navigation.navigate("LoginPage");     //Go to register/login page
                     return;
                 } else {
                     await Location.startLocationUpdatesAsync(LOCATION_TASK_NAME, {
                         accuracy: Location.Accuracy.Balanced,
-                        timeInterval: 300000, //Every five minutes
+                        //timeInterval: 5000, //Every five seconds
                         foregroundService: {
                             notificationTitle: "GPS Tracking",
                             notificationBody: "Your Location is being tracked for research app"
                         },
                         pausesUpdatesAutomatically: false,
                     });
-                    //navigation.navigate("Home");    //Go to actual page
+                    navigation.navigate("HomePage");    //Go to actual page
                 }
             }
         } catch (error) {
@@ -88,8 +94,8 @@ export default class GPS extends React.Component {
             console.log("Error with asking user permission");
             console.log(error);
             if (!status.locationServiceEnabled) {
-                //const { navigation } = this.props;
-                //navigation.navigate("App");
+                const { navigation } = this.props;
+                navigation.navigate("LoginPage");
                 //Go back to login page
             }
         }
@@ -99,9 +105,11 @@ export default class GPS extends React.Component {
         return (
             <View style={styles.container}>
                 <View style={[styles.infoContainer]}>
-                    <Text style={[styles.infoText]}>For the purposes of this research, your location will be tracked. 
-                    Location tracking will help us further in developing accurate models for predicting virus spread. 
-                    Click on the enable background location button below to enable gps tracking.{"\n\n"}</Text>
+                    <Text style={[styles.infoText]}>
+                        For the purposes of this research, your location will be tracked. 
+                        Location tracking will help us further in developing accurate models for predicting virus spread. 
+                        Click on the enable background location button below to enable gps tracking.{"\n\n"}
+                    </Text>
                 </View>
                 <TouchableOpacity onPress={this.onPress} style={styles.button}>
                     <Text style={styles.buttonText}>Enable background location</Text>
@@ -149,6 +157,7 @@ TaskManager.defineTask(LOCATION_TASK_NAME, async ({ data, error }) => {
 
         //Getting userID without periods
         const userID = await AsyncStorage.getItem('currentUser');
+        //console.log("User: " + userID);
 
         //get eastern time
         let date = new Date();
@@ -168,6 +177,11 @@ TaskManager.defineTask(LOCATION_TASK_NAME, async ({ data, error }) => {
             acc = currentLocation.coords.accuracy;      //radius of uncertainity for location, measured in meters
         });
 
+        //See if firebase is initialized
+        if (!firebase.apps.length){
+            firebase.initializeApp(firebaseConfig)
+        }     
+    
         //Storing user location on firebase
         firebase.database().ref('users/' + dbpath).set({
             timestampEpoch: timestamp,

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View ,StyleSheet,Image  } from 'react-native';
+import { View, StyleSheet, Image, AsyncStorage  } from 'react-native';
 import { Button,TextInput,Surface,Text, Card, Title, Paragraph } from 'react-native-paper';
 import NotifyService from '../../Services/notify.service';
 import { IsEmail, IsPassword } from '../../Utils/validator.utils';
@@ -40,6 +40,17 @@ validateInput = () => {
     return IsEmail(email, 'Enter correct email address') && IsPassword(password, 'Enter correct password format')
 }
 
+setUser = async() => {
+    await AsyncStorage.setItem('currentUser', JSON.stringify(this.state.email))
+        .then( () => {
+            //console.log(this.state.email + " was successfully saved");
+        })
+        .catch( () => {
+            //console.log('There was an error saving the user')
+        });
+    
+    this.props.navigation.navigate('notificationPage')
+}
 //   componentDidMount() {
 //     // Listen for authentication state to change.
 //     Firebase.auth().onAuthStateChanged(user => {
@@ -108,7 +119,8 @@ validateInput = () => {
                             <Button
                                 mode="contained"
                                 // onPress={() => this.login()}
-                                onPress={() =>  this.props.navigation.navigate('HomePage')}
+                                //onPress={() =>  this.props.navigation.navigate('notificationPage')}
+                                onPress={this.setUser}
                                 style={{ justifyContent: 'center' }}
                             >
                                 Login

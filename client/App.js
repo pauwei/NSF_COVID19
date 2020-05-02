@@ -1,11 +1,11 @@
 import React from 'react';
-import Routers from './Navigation'
+import { Router } from './Navigation'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 
 
 export default class App extends React.Component {
  render() {
-    const Appcontainer = createAppContainer(Routers.Router)
+    const Appcontainer = createAppContainer(Router)
     return (
       <Appcontainer />
     )

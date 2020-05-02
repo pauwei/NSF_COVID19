@@ -20,7 +20,7 @@ const LoginPage = createStackNavigator({
     Login: {
         screen: LoginComp, 
         navigationOptions: {
-            header: null
+            headerShown: false
         }
     }
 })
@@ -29,7 +29,7 @@ const HomePage  = createStackNavigator({
     Home: {
         screen: BottomNaviComp, 
         navigationOptions: {
-            header: null
+            headerShown: false
         }
     }
 })
@@ -38,7 +38,25 @@ const RegisterPage  = createStackNavigator({
     Register: {
         screen: RegisterComp, 
         navigationOptions: {
-            header: null
+            headerShown: false
+        }
+    }
+})
+
+const gpsPage = createStackNavigator({
+    GPSComp: {
+        screen: GPS,
+        navigationOptions: {
+            headerShown: false
+        }
+    }
+})
+
+const notificationPage = createStackNavigator({
+    notificationComp: {
+        screen: PushNotification,
+        navigationOptions: {
+            headerShown: false
         }
     }
 })
@@ -47,6 +65,12 @@ const SwitchLoginHome = createSwitchNavigator({
     LoginPage,
     HomePage,
     RegisterPage,
+    gpsPage,
+    notificationPage,
 })
 
-module.exports.Router = createAppContainer(SwitchLoginHome)
+//const Router = createAppContainer(SwitchLoginHome)
+
+//module.exports.Router = createAppContainer(SwitchLoginHome)
+export const Router = createAppContainer(SwitchLoginHome) ;
+//export default Router = createAppContainer(SwitchLoginHome);

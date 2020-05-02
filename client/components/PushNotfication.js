@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {TextInput, Text, View, Keyboard, StyleSheet, Button, Vibration, Platform} from 'react-native';
+import { TouchableOpacity, Text, View, StyleSheet, Button, Vibration, Platform} from 'react-native';
 import { Notifications } from 'expo';
 import * as Permissions from 'expo-permissions';
 import Constants from 'expo-constants';
@@ -23,7 +23,7 @@ export default class PushNotification extends Component {
         return;
       }
       token = await Notifications.getExpoPushTokenAsync();
-      //console.log(token);
+      console.log(token);
       this.setState({ expoPushToken: token });
     } else {
       alert('Must use physical device for Push Notifications');
@@ -42,11 +42,12 @@ export default class PushNotification extends Component {
   componentDidMount() {
     this.registerForPushNotificationsAsync();
     this._notificationSubscription = Notifications.addListener(this._handleNotification);
+    //this.props.navigation.navigate('gpsPage');
   }
 
   _handleNotification = notification => {
     Vibration.vibrate();
-    //console.log(notification);
+    console.log(notification);
     this.setState({ notification: notification });
   };
 
@@ -182,11 +183,16 @@ export default class PushNotification extends Component {
         Notifications.scheduleLocalNotificationAsync(
             localNotification0, schedulingOptions16
         );
-
     }
 
+    // _nextPage = () => {
+    //   const { navigation } = this.props;
+    //   console.log("Hello there");
+    //   navigation.navigate('gpsPage');
+    // }
+
     handleNotification() {
-        // console.warn("Received notification");
+        console.warn("Received notification");
     }
 
     async componentDidMount() {
@@ -194,6 +200,7 @@ export default class PushNotification extends Component {
 
         if (Constants.isDevice && result.status === 'granted') {
             //console.log('Notification permissions granted.')
+            this.props.navigation.navigate("gpsPage");
         }
 
         Notifications.addListener(this.handleNotification);
@@ -201,9 +208,18 @@ export default class PushNotification extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <Button title="Push Notifications" onPress={this.onSubmit} />
+          <View style={styles.container}>
+            <View style={[styles.infoContainer]}>
+              <Text style={[styles.infoText]}>
+                For the purposes of this research, push notifications on your phone will be enabled.
+                Push notification will help us further in our research on predicting virus sparead and hopefully increase user participation.
+                Click on the push notification button below to enable push notifications. {"\n\n"}
+              </Text>
             </View>
+            <TouchableOpacity onPress={this.onSubmit} style={styles.button}>
+              <Text style={styles.buttonText}>Enable Push Notifications</Text>
+            </TouchableOpacity>
+          </View>
         );
     }
 }
@@ -211,8 +227,25 @@ export default class PushNotification extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
+    justifyContent: 'center',
+    paddingHorizontal: 10,
+  },
+  button: {
+    alignItems: 'center',
+    backgroundColor: '#1976D2',
+    padding: 20,
+    borderRadius: 5,
+  },
+  buttonText: {
+    fontWeight: '500',
+    color: '#FFFFFF',
+  },
+  infoContainer: {
+    alignItems: 'center',
+    padding: 10,
+  },
+  infoText: {
+    fontSize: 20,
+    color: '#6B6C69',
   }
 });
