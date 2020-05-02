@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "client",
-    "slug": "client",
+    "name": "Notification",
+    "slug": "Notification",
     "platforms": [
       "ios",
       "android",
@@ -15,6 +15,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "packagerOpts":{
+      "sourceExts": ["js", "json", "ts", "tsx", "jsx", "vue"]
+    },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -22,7 +25,20 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "UIBackgroundModes": [
+          "location",
+          "fetch"
+        ]
+      }
+    },
+    "web": {
+      "build": {
+        "babel": {
+          "include": ["galio-framework"]
+        }
+      }
     }
   }
 }
