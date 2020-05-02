@@ -74,7 +74,8 @@ export default class GPS extends React.Component {
                     this.setState({
                         errorMessage: "Permission to access location was denied"
                     });
-                    navigation.navigate("LoginPage");     //Go to register/login page
+                    console.log("Under granted permissions to access location");
+                    navigation.navigate("HomePage");     //Go to register/login page
                     return;
                 } else {
                     await Location.startLocationUpdatesAsync(LOCATION_TASK_NAME, {
@@ -86,6 +87,7 @@ export default class GPS extends React.Component {
                         },
                         pausesUpdatesAutomatically: false,
                     });
+                    console.log("Is working correctly");
                     navigation.navigate("HomePage");    //Go to actual page
                 }
             }
@@ -95,7 +97,8 @@ export default class GPS extends React.Component {
             console.log(error);
             if (!status.locationServiceEnabled) {
                 const { navigation } = this.props;
-                navigation.navigate("LoginPage");
+                console.log("Error with asking user permission");
+                navigation.navigate("HomePage");
                 //Go back to login page
             }
         }
@@ -106,8 +109,8 @@ export default class GPS extends React.Component {
             <View style={styles.container}>
                 <View style={[styles.infoContainer]}>
                     <Text style={[styles.infoText]}>
-                        For the purposes of this research, your location will be tracked. 
-                        Location tracking will help us further in developing accurate models for predicting virus spread. 
+                        For the purposes of this research, your location while participating in the survey will need to be enabled. 
+                        The information will be for research modeling only and is completely anonymous. Your personal data will not be shared with anybody or parties. 
                         Click on the enable background location button below to enable gps tracking.{"\n\n"}
                     </Text>
                 </View>

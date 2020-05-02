@@ -83,10 +83,10 @@ setUser = async() => {
     <View style={{ flex: 1 }} >
                 <View style={{ flex: 1, }} />
                 <View style={{ flex: 5, alignItems: 'center'}}>
-                <Image  source={ require('../../assets/img/icicLogo.png')}
+                <Image  source={ require('../../assets/img/LoginImage.png')}
                 style={{
-                    width: 250,
-                    height: 300,
+                    width: 472.5,
+                    height: 337.75,
                   }}
                 />
 

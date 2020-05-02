@@ -212,7 +212,6 @@ export default class PushNotification extends Component {
             <View style={[styles.infoContainer]}>
               <Text style={[styles.infoText]}>
                 For the purposes of this research, push notifications on your phone will be enabled.
-                Push notification will help us further in our research on predicting virus sparead and hopefully increase user participation.
                 Click on the push notification button below to enable push notifications. {"\n\n"}
               </Text>
             </View>

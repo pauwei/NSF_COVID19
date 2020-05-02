@@ -19,18 +19,18 @@ export default class BottomNaviComp extends React.Component {
   state = {
     index: 0,
     routes: [
-      { key: 'home', title: 'Home', icon: 'home' },
-      { key: 'form', title: 'Form', icon: 'file-question' },
-      { key: 'infomation', title: 'Infomation', icon: 'information' },
+      { key: 'info', title: 'Info', icon: 'home' },
+      { key: 'survey', title: 'Survey', icon: 'file-question' },
+      { key: 'map', title: 'COVID19 Map', icon: 'information' },
     ],
   };
 
   _handleIndexChange = index => this.setState({ index });
 
   _renderScene = BottomNavigation.SceneMap({
-    home: CardComp,
-    form: WebComp,
-    infomation: InfoMapComp,
+    info: CardComp,
+    survey: WebComp,
+    map: InfoMapComp,
   });
 
   render() {
