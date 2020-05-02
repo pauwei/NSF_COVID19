@@ -4,6 +4,8 @@ import { createStackNavigator } from 'react-navigation-stack';
 import LoginComp from './components/forms/LoginComp'
 import BottomNaviComp from './components/BottomNaviComp'
 import RegisterComp from './components/forms/RegisterComp'
+import GPS from './components/gps-tracking'
+import PushNotification from './components/PushNotfication'
 
 // const SearchStackNavigator = createStackNavigator({
 //     Search: { 
