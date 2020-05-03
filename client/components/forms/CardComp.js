@@ -18,21 +18,11 @@ const CardComp = () => (
     </Card.Content>
 
     <Card.Actions>
-      <Button>Upon completion, you will receive gift card in email</Button>
-      {/* <Button>Ok</Button> */}
+      {/* <Button>Upon completion, you will receive gift card in email</Button> */}
+      <Button>Take Survey Here</Button>
     </Card.Actions>
-
-    <Card.Title title="" subtitle="" left={LeftContent} />
-    <Card.Content>
-      <Title>Take Survey Here</Title>
-    </Card.Content>
     <Card.Cover source={ require('../../assets/img/arrow.gif') } 
-        style={{ height: 215,   }}/>
-
-    <Card.Actions>
-      {/*<Button>Upon completion, you will receive gift card in email</Button>*/}
-      {/* <Button>Ok</Button> */}
-    </Card.Actions>
+        style={{ height: 80,   }}/>
   </Card>
   
 );
