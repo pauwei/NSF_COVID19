@@ -25,7 +25,7 @@ const CardComp = () => (
 
     <Card.Actions style={{  flex: 1,  }}>
       {/* <Button>Upon completion, you will receive gift card in email</Button> */}
-      <Button>Take Survey Here</Button>
+      <Button style={{  flex: 1,  }}>Take Survey Here</Button>
     </Card.Actions>
     <Card.Cover source={ require('../../assets/img/arrow.gif') } 
         style={{  height:"20%" ,resizeMode: 'contain', }}/>
