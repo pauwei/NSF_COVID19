@@ -4,6 +4,8 @@ import { Notifications } from 'expo';
 import * as Permissions from 'expo-permissions';
 import Constants from 'expo-constants';
 
+let granted = false;
+
 export default class PushNotification extends Component {
   state = {
     expoPushToken: '',
@@ -51,7 +53,11 @@ export default class PushNotification extends Component {
     this.setState({ notification: notification });
   };
 
-  onSubmit() {
+  onSubmit = async() => {
+    //this._enableNotification();
+    let result = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+
+    Notifications.addListener(this.handleNotification);
         const localNotification0 = {
           sound: 'default',  
           title: 'Notification!',
@@ -183,25 +189,24 @@ export default class PushNotification extends Component {
         Notifications.scheduleLocalNotificationAsync(
             localNotification0, schedulingOptions16
         );
-    }
 
-    // _nextPage = () => {
-    //   const { navigation } = this.props;
-    //   console.log("Hello there");
-    //   navigation.navigate('gpsPage');
-    // }
+        if (Constants.isDevice && result.status === 'granted') {
+          //console.log('Notification permissions granted.')
+          this.props.navigation.navigate("gpsPage");
+        }
+    }
 
     handleNotification() {
         console.warn("Received notification");
     }
 
     async componentDidMount() {
-        let result = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+        // let result = await Permissions.askAsync(Permissions.NOTIFICATIONS);
 
-        if (Constants.isDevice && result.status === 'granted') {
-            //console.log('Notification permissions granted.')
-            this.props.navigation.navigate("gpsPage");
-        }
+        // if (Constants.isDevice && result.status === 'granted') {
+        //     //console.log('Notification permissions granted.')
+        //     this.props.navigation.navigate("gpsPage");
+        // }
 
         Notifications.addListener(this.handleNotification);
     }
