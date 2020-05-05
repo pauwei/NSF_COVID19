@@ -81,14 +81,16 @@ setUser = async() => {
         
     //   </Surface>
     <View style={{ flex: 1 }} >
-                <View style={{ flex: 1, }} />
-                <View style={{ flex: 5, alignItems: 'center', padding: 5 }}>
+                <View style={{ flex: 2, }} />
+                <View style={{ flex: 4, alignItems: 'center', }}>
+                <View style={{ width: '90%' }} >
                 <Image  source={ require('../../assets/img/LoginImage.png')}
                 style={{
                     width: "100%",
-                    height: "70%",
+                    height: "90%",
                   }}
                 />
+                 </View>
 
                   {/* <Card>                       
                         <Card.Cover source={ require('../../assets/img/ICIC.png') } 
