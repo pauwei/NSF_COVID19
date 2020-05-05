@@ -12,7 +12,11 @@ const CardComp = () => (
     <Card.Content style={{ flex: 4, alignItems: 'center', }}>
       <Title>NSF COVID19 Survey</Title>
       <Card.Cover source={ require('../../assets/img/amazongc.png') } 
-        style={{ width:'90%'  }}/>
+        style={{   
+          width: "100%",
+          resizeMode: 'contain',
+          // height: null 
+           }}/>
       <Paragraph >Thank you for participating in the COVID-19 social distancing survey. We will occasionally ask your opinions about outdoor trips during COVID-19 in the next three months. 
         Your answers will help us better predict when the stay-at-home restriction can be safely lifted. Your identity and answers will be completely anonymous and for research only. 
         Data will not be shared with anybody or parties other than the research team at University of Florida. This research is supported by National Science Foundation (NSF). 
@@ -24,7 +28,7 @@ const CardComp = () => (
       <Button>Take Survey Here</Button>
     </Card.Actions>
     <Card.Cover source={ require('../../assets/img/arrow.gif') } 
-        style={{  height:"20%"  }}/>
+        style={{  height:"20%" ,resizeMode: 'contain', }}/>
   </Card>
   </ScrollView>
 );
