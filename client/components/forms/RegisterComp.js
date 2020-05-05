@@ -76,12 +76,53 @@ class RegisterComp extends Component {
               }, {
                 value: '$200,000+',
           }];
-          let gender = [{
+        let gender = [{
             value: 'Female ',
           }, {
             value: 'Male',
           }, {
             value: 'Other',
+        }];
+        let medical = [{
+            value: 'Yes ',
+          }, {
+            value: 'No',
+          }, ];
+
+        let marital = [{
+            value: 'Single ',
+          }, {
+            value: 'In a relationship',
+          }, {
+            value: 'Married',
+        }, {
+            value: 'Separated',
+        },{
+            value: 'Divorced',
+        },
+        {
+            value: 'Widowed',
+        }
+    ];
+      
+        let race = [{
+            value: 'Nonresident Alien',
+          }, {
+            value: 'Hispanics of any race',
+          }, {
+            value: 'American Indian or Alaska Native',
+          }, {
+            value: 'Asian',
+          }, {
+            value: 'White',
+          }, {
+            value: 'Two or more races',
+        }, {
+            value: 'Native Hawaiian or Other Pacific Islander',
+          }, {
+            value: 'Other',
+        }, {
+            value: 'Prefer not to respond',
       }];
 
         return (
@@ -89,8 +130,11 @@ class RegisterComp extends Component {
             <View style={{ flex: 1,  }} >
                 <View style={{ flex: 1 }} />
                 <View style={{ flex: 4, alignItems: 'center' }} >
-                    <View style={{ width: '90%' }} >
-                        <View style={{ padding: 5 }} >
+                    <View style={{ width: '80%' }} >
+                    <View style={{ padding: 5,height:50}} >
+                           
+                        </View>
+                        <View style={{ padding: 5}} >
                             <TextInput
                                 mode='outlined'
                                 label='Name'
@@ -120,8 +164,8 @@ class RegisterComp extends Component {
                         <Dropdown
                                 label='Gender'
                                 data={gender}
-                                value={this.state.income}
-                                onChangeText={income => this.onInconmeSelected(income)}
+                                value={this.state.gender}
+                                onChangeText={gender => this.setState({ gender })}
                             />
                         </View>
                         <View style={{ padding: 5 }} >
@@ -136,9 +180,9 @@ class RegisterComp extends Component {
                         <View style={{ padding: 5 }} >
                         <Dropdown
                                 label='Race'
-                                data={income}
-                                value={this.state.income}
-                                onChangeText={income => this.onInconmeSelected(income)}
+                                data={race}
+                                value={this.state.race}
+                                onChangeText={race => this.setState({ race })}
                             />
                         </View>
                         <View style={{ padding: 5 }} >
@@ -154,9 +198,9 @@ class RegisterComp extends Component {
                         <View style={{ padding: 5 }} >
                         <Dropdown
                                 label='Marital status'
-                                data={income}
-                                value={this.state.income}
-                                onChangeText={income => this.onInconmeSelected(income)}
+                                data={marital}
+                                value={this.state.marital}
+                                onChangeText={marital =>this.setState({ marital })}
                             />
                         </View>
                         <View style={{ padding: 5 }} >
@@ -170,9 +214,9 @@ class RegisterComp extends Component {
                         <View style={{ padding: 5 }} >
                         <Dropdown
                                 label='Do you have any medical condition'
-                                data={income}
-                                value={this.state.income}
-                                onChangeText={income => this.onInconmeSelected(income)}
+                                data={medical}
+                                value={this.state.medical}
+                                onChangeText={medical => this.setState({ medical })}
                             />
                         </View>
                         <View style={{ padding: 5 }} >

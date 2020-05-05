@@ -82,11 +82,11 @@ setUser = async() => {
     //   </Surface>
     <View style={{ flex: 1 }} >
                 <View style={{ flex: 1, }} />
-                <View style={{ flex: 5, alignItems: 'center'}}>
+                <View style={{ flex: 5, alignItems: 'center', padding: 5 }}>
                 <Image  source={ require('../../assets/img/LoginImage.png')}
                 style={{
-                    width: 365,
-                    height: 280,
+                    width: "100%",
+                    height: "70%",
                   }}
                 />
 
