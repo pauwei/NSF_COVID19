@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, StyleSheet, Image, AsyncStorage  } from 'react-native';
+import { ScrollView,View, StyleSheet, Image, AsyncStorage  } from 'react-native';
 import { Button,TextInput,Surface,Text, Card, Title, Paragraph } from 'react-native-paper';
 import NotifyService from '../../Services/notify.service';
 import { IsEmail, IsPassword } from '../../Utils/validator.utils';
@@ -80,26 +80,9 @@ setUser = async() => {
    
         
     //   </Surface>
-    <View style={{ flex: 1 }} >
-                <View style={{ flex: 2, }} />
-                <View style={{ flex: 4, alignItems: 'center', }}>
-                <View style={{ width: '90%' }} >
-                <View  >
-                <Image  source={ require('../../assets/img/LoginImage.png')}
-                style={{
-                    width: null,
-                    resizeMode: 'contain',
-                    height: "90%"
-                  }}
-                />
-                </View>
-                 </View>
 
-                  {/* <Card>                       
-                        <Card.Cover source={ require('../../assets/img/ICIC.png') } 
-                        style={{ height:250, width: 250,  }}/>
-                    </Card> */}
-                    </View>
+    <View style={{ flex: 1 }} >
+                <View style={{ flex: 1, }} />
                 <View style={{ flex: 4, alignItems: 'center' }} >
                     <View style={{ width: '90%' }} >
                         <View style={{ padding: 5 }} >
@@ -145,8 +128,24 @@ setUser = async() => {
                         </View>
                     </View>
                 </View>
+                <View style={{ flex: 4, alignItems: 'center', }}>
+                <View style={{ width: '90%' }} >
+                <View  >
+                <Image  source={ require('../../assets/img/LoginImage.png')}
+                style={{
+                    width: null,
+                    resizeMode: 'contain',
+                    height: "90%"
+                  }}
+                />
+                </View>
+                 </View>
+
+                    </View>
+                
                 <View style={{ flex: 1 }} />
             </View>
+
       );
     }
   
