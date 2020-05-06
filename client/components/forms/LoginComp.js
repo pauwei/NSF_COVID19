@@ -128,7 +128,9 @@ setUser = async() => {
                         </View>
                     </View>
                 </View>
-                <View style={{ flex: 4, alignItems: 'center', }}>
+                <View style={{ flex: 2, alignItems: 'center', }}>
+                    </View>
+                <View style={{ flex: 5, alignItems: 'center', }}>
                 <View style={{ width: '90%' }} >
                 <View  >
                 <Image  source={ require('../../assets/img/LoginImage.png')}
