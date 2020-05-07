@@ -1,85 +1,166 @@
 import * as React from 'react';
-import { ScrollView,View, StyleSheet, Image, AsyncStorage  } from 'react-native';
+import { ScrollView,View, StyleSheet, Image, AsyncStorage, Alert } from 'react-native';
 import { Button,TextInput,Surface,Text, Card, Title, Paragraph } from 'react-native-paper';
 import NotifyService from '../../Services/notify.service';
 import { IsEmail, IsPassword } from '../../Utils/validator.utils';
+import * as firebase from 'firebase';
+import "firebase/database";
+import "firebase/firestore";
+import "firebase/storage";
+import { YellowBox } from 'react-native';
+import _ from 'lodash';
+
+//Disable yellow warnings
+YellowBox.ignoreWarnings(['Setting a timer']);
+const _console = _.clone(console);
+console.warn = message => {
+  if (message.indexOf('Setting a timer') <= -1) {
+    _console.warn(message);
+  }
+};
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDDbZi5dhSWzTB7cZTVgbHFdaOf4hkuagE",
+    authDomain: "nsf-covid19-app.firebaseapp.com",
+    databaseURL: "https://nsf-covid19-app.firebaseio.com",
+    projectId: "nsf-covid19-app",
+    storageBucket: "nsf-covid19-app.appspot.com",
+    messagingSenderId: "783468935285",
+    appId: "1:783468935285:web:bf5ec53bc91f5bfefaa03c",
+    measurementId: "G-YXN3G28EJH"
+};
 
 export default class LoginComp extends React.Component{ 
   state = {
     email:"admin@gmail.com",
+    //email: "qwop@gmail.com",
     password : ""
   }
 
-  login = async () => {
-    if (!this.validateInput()) {
-        return;
+  UNSAFE_componentWillMount = async() => {
+    //Check if first launch to initialize firebase
+    try {
+        const hasLaunched = await AsyncStorage.getItem(HAS_LAUNCHED);
+        if (hasLaunched === null) {
+            await AsyncStorage.setItem('HAS_LAUNCHED', 'true')
+                .then( () => {
+                    firebase.initializeApp(firebaseConfig);
+                })
+                .catch( () => {
+                    console.log("Firebase uninitialized");
+                });
+        }
+    } catch (error) {
+        //firebase has already been initialized
+        //console.log("Error logging user in");
     }
+  }
 
-    const params = {
-        email: this.state.email,
-        password: this.state.password,
+  onPress = async() => {
+    //validate fields
+
+    //Check if firebase is initialized
+    if (!firebase.apps.length){
+        firebase.initializeApp(firebaseConfig)
+    }  
+
+    //validate login
+    let userID = this.state.email.replace(/[."]/g, '');
+    firebase.database().ref('/users/' + userID).once('value').then( (data) => {
+        if (!data.exists()) {
+            this.showAlert('Email not valid');
+            return;
+        }
+        
+        //Getting user password
+        let password;
+        data.forEach( (userData) => {
+            userData.forEach( (userInfo) => {
+                if (userInfo.key === 'password'){
+                    password = JSON.stringify(userInfo);
+                    //console.log("Password: ", userInfo)
+                }
+            });
+        });
+
+        //checking password
+        password = password.replace(/["]/g, '');
+        if (password !== this.state.password) {
+            this.showAlert('Password is incorrect');
+            return;
+        }
+        
+        this.setAsyncUser(userID);
+    });
+  }
+
+  setAsyncUser = async(userID) => {
+    //Saving the user to async storage
+    await AsyncStorage.setItem('currentUser', JSON.stringify(userID)).then( () => {
+        //console.log(userID + " saved successfully");
+        this.nextPage(true);
+        return true;
+    }).catch( () => {
+        //console.log(userID + " not saved successfully");
+        this.nextPage(false);
+        return false;
+    });
+  }
+
+  nextPage = (go) => {
+    //Go to notification page
+    if (go) {
+        this.props.navigation.navigate('notificationPage')
+    } else {
+        //console.log("Error submitting . . . , please try again");
+        this.showAlert('Error logging in . . . , please try again');
     }
+  }
 
-    // const result = await PublicApi.login(params);
-    // if (result.success) {
-    //     NotifyService.notify({
-    //         title: 'Login Success',
-    //         duration: 500,
-    //         message: '',
-    //         type: 'success'
-    //     })
+  showAlert = (alertMsg) => {
+      Alert.alert(
+          'Login Error',
+          alertMsg,
+          [
+              {text: 'OK'}
+          ],
+          {cancelable: false}
+      );
+  }
 
-    //     AppConstants.USER = result.response;
-    //     this.storeData(result.token);
-    //     resetToScreen('App');
-    // }
-}
+//   login = async () => {
+//     if (!this.validateInput()) {
+//         return;
+//     }
+
+//     const params = {
+//         email: this.state.email,
+//         password: this.state.password,
+//     }
+
+//     // const result = await PublicApi.login(params);
+//     // if (result.success) {
+//     //     NotifyService.notify({
+//     //         title: 'Login Success',
+//     //         duration: 500,
+//     //         message: '',
+//     //         type: 'success'
+//     //     })
+
+//     //     AppConstants.USER = result.response;
+//     //     this.storeData(result.token);
+//     //     resetToScreen('App');
+//     // }
+// }
+
 validateInput = () => {
     const { email, password } = this.state;
 
     return IsEmail(email, 'Enter correct email address') && IsPassword(password, 'Enter correct password format')
 }
 
-setUser = async() => {
-    await AsyncStorage.setItem('currentUser', JSON.stringify(this.state.email))
-        .then( () => {
-            //console.log(this.state.email + " was successfully saved");
-        })
-        .catch( () => {
-            //console.log('There was an error saving the user')
-        });
-    
-    this.props.navigation.navigate('notificationPage')
-}
-//   componentDidMount() {
-//     // Listen for authentication state to change.
-//     Firebase.auth().onAuthStateChanged(user => {
-//         console.log(user);
-//         if (user != null) {
-//             this.props.navigation.navigate('User');
-//         }
-
-//         // Do other things
-//     });
-// }
-  render(){
+render(){
     return (   
-    //   <Surface style={styles.container} >
-    //    <TextInput
-    //     label='Email'
-    //     value={this.state.email}
-    //     onChangeText={text => this.setState({ email:text })}
-    //   />
-    //    <TextInput
-    //     label='Password'
-    //     value={this.state.password}
-    //     secureTextEntry={true} autoCorrect={false}
-    //     onChangeText={text => this.setState({ password:text })}
-    //   />
-    //     <Button  onPress={()=>this.login()}>Sign In</Button>
-   
-        
-    //   </Surface>
 
     <View style={{ flex: 1 }} >
                 <View style={{ flex: 1, }} />
@@ -108,7 +189,7 @@ setUser = async() => {
                                 mode="contained"
                                 // onPress={() => this.login()}
                                 //onPress={() =>  this.props.navigation.navigate('notificationPage')}
-                                onPress={this.setUser}
+                                onPress={this.onPress}
                                 style={{ justifyContent: 'center' }}
                             >
                                 Login

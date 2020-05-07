@@ -26,7 +26,7 @@ export default class GPS extends React.Component {
         console.ignoredYellowBox = [ 'Setting a timer' ];
     }
     onPress = async() => {
-        firebase.initializeApp(firebaseConfig);
+        //firebase.initializeApp(firebaseConfig);
 
         //Saving the user to async storage
         // await AsyncStorage.setItem('currentUser', JSON.stringify("paulweizhang@gmail.com"))

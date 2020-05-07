@@ -1,3 +1,4 @@
 NSF COVID 19 App
 	The manifest URL is: https://exp.host/@pauwei/Notification (​https://exp.host/@pauwei/Notification/index.exp?sdkVersion=37.0.0​). Learn more. (​https://expo.fyi/manifest-url​)
 	The project page is: https://expo.io/@pauwei/Notification (​https://expo.io/@pauwei/Notification​). Learn more. (​https://expo.fyi/project-page​)
+
