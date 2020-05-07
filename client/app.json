@@ -33,6 +33,10 @@
         ]
       }
     },
+    "android": {
+      "package": "com.iciclab.nsfcovid19",
+      "versionCode": 1
+    },
     "web": {
       "build": {
         "babel": {
