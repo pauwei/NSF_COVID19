@@ -128,6 +128,7 @@ setUser = async() => {
                         </View>
                     </View>
                 </View>
+
                 <View style={{ flex: 4, alignItems: 'center', }}>
                 <View style={{ width: '90%' }} >
                 <View  >
