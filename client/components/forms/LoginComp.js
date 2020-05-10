@@ -32,7 +32,7 @@ const firebaseConfig = {
 
 export default class LoginComp extends React.Component{ 
   state = {
-    email:"admin@gmail.com",
+    email:"",
     //email: "qwop@gmail.com",
     password : ""
   }
