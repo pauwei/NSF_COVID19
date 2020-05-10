@@ -54,15 +54,15 @@ export default class PushNotification extends Component {
   onSubmit() {
         const localNotification0 = {
           sound: 'default',  
-          title: 'Notification!',
-          body: 'Notification!',
+          title: 'Friendly Notification.',
+          body: 'Friendly remind you to complete the urban mobility survey.',
           _displayInForeground: true,        
         };
 
         const localNotification1 = {
           sound: 'default',  
-          title: 'Notification!',
-          body: 'Notification!',
+          title: 'Friendly Notification!',
+          body: 'Friendly remind you to complete the urban mobility survey.',
           _displayInForeground: true,        
         };
 
