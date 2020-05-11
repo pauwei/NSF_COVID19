@@ -216,9 +216,9 @@ render(){
                         </View>
                     </View>
                 </View>
-                <View style={{ flex: 2, alignItems: 'center', }}>
+                <View style={{ flex: 0, alignItems: 'center', }}>
                     </View>
-                <View style={{ flex: 5, alignItems: 'center', }}>
+                <View style={{ flex: 3, alignItems: 'center', }}>
                 <View style={{ width: '90%' }} >
                 <View  >
                 <Image  source={ require('../../assets/img/LoginImage.png')}

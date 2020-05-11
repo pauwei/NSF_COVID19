@@ -219,13 +219,13 @@ class RegisterComp extends Component {
         let marital =  [{
                 value: 'Married',
             }, {
-                value: 'Widowed',
+                value: 'Single',
             }, {
                 value: 'Separated',
             }, {
                 value: 'Divorced',
             }, {
-                value: 'Single ',
+                value: 'Widowed ',
             }];
 
         let income = [{
