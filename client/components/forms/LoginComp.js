@@ -32,12 +32,18 @@ const firebaseConfig = {
 
 export default class LoginComp extends React.Component{ 
   state = {
-    email:"admin@gmail.com",
-    //email: "qwop@gmail.com",
+    email:"",
     password : ""
   }
 
   UNSAFE_componentWillMount = async() => {
+    //Check if user has logged in before
+    let userEmail = await AsyncStorage.getItem('currentUser');
+    if (userEmail){
+        userEmail = userEmail.replace(/["]/g, '');
+        this.setState( {email: userEmail} );
+    }
+
     //Check if first launch to initialize firebase
     try {
         const hasLaunched = await AsyncStorage.getItem(HAS_LAUNCHED);
@@ -90,7 +96,8 @@ export default class LoginComp extends React.Component{
             return;
         }
         
-        this.setAsyncUser(userID);
+        //this.setAsyncUser(userID);
+        this.setAsyncUser(this.state.email);
     });
   }
 
