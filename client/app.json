@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "Notification",
-    "slug": "Notification",
+    "name": "UrbanMobilitySurvey",
+    "slug": "UrbanMobilitySurvey",
     "platforms": [
       "ios",
       "android",
       "web"
     ],
-    "version": "1.0.0",
+    "version": "1.1.1",
     "orientation": "portrait",
-    "icon": "./assets/img/icicLog.png",
+    "icon": "./assets/img/icicLogo.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -25,7 +25,7 @@
       "**/*"
     ],
     "ios": {
-      "bundleIdentifier": "com.iciclab.urbanmobilitytracker",
+      "bundleIdentifier": "com.iciclab.nsfcovid19",
       "buildNumber": "1.0.0",
       "supportsTablet": true,
       "infoPlist": {

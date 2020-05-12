@@ -2,11 +2,13 @@ import React from 'react';
 import { TouchableOpacity, Text, View, StyleSheet, AsyncStorage } from 'react-native';
 import * as Location from 'expo-location';
 import * as TaskManager from 'expo-task-manager';
+import * as BackgroundFetch from 'expo-background-fetch';
 import * as firebase from 'firebase';
 import "firebase/database";
 import "firebase/firestore";
 import "firebase/storage";
 
+let i = 0;
 const LOCATION_TASK_NAME = 'background-location-task';
 
 const firebaseConfig = {
@@ -87,7 +89,27 @@ export default class GPS extends React.Component {
                         },
                         pausesUpdatesAutomatically: false,
                     });
-                    console.log("Is working correctly");
+
+                    // Enable Background Fetch
+                    // const status = await BackgroundFetch.getStatusAsync();
+                    // switch (status) {
+                    //     case BackgroundFetch.Status.Restricted:
+                    //     case BackgroundFetch.Status.Denied:
+                    //         console.log("Background execution is disabled");
+                    //         return;
+                        
+                    //         default: {
+                    //             console.log("Background execution allowed");
+                                
+                    //             let tasks = await TaskManager.getRegisteredTasksAsync();
+                    //             if (tasks.find(f => f.taskName === LOCATION_TASK_NAME) === null){
+                    //                 console.log("Registering task");
+                    //             } else {
+                    //                 console.log('Task ' + LOCATION_TASK_NAME + ' already registered, skipping');
+                    //             }
+                    //         }
+                    // }
+
                     navigation.navigate("HomePage");    //Go to actual page
                 }
             }
@@ -185,6 +207,14 @@ TaskManager.defineTask(LOCATION_TASK_NAME, async ({ data, error }) => {
             firebase.initializeApp(firebaseConfig)
         }     
     
+        // Testing background location
+        // let testing = 'Test ' + (i + 1);
+        // firebase.database().ref('users/' + 'testing/' + testing).set({
+        //     Testing: "Testing, Testing, 1 2 3 . . ."
+        // });
+
+        // console.log("Helloer" + dbpath);
+
         //Storing user location on firebase
         firebase.database().ref('users/' + dbpath).set({
             timestampEpoch: timestamp,
