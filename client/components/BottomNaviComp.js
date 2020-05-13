@@ -19,9 +19,9 @@ export default class BottomNaviComp extends React.Component {
   state = {
     index: 0,
     routes: [
-      { key: 'info', title: 'Info', icon: 'home' },
+      { key: 'info', title: 'Instruction', icon: 'home' },
       { key: 'survey', title: 'Survey', icon: 'file-question' },
-      { key: 'map', title: 'ICIC Lab', icon: 'information' },
+      { key: 'map', title: 'Contact', icon: 'information' },
     ],
   };
 
