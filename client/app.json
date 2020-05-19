@@ -39,7 +39,7 @@
       }
     },
     "android": {
-      "package": "com.iciclab.nsfcovid19",
+      "package": "com.iciclab.urbanmobilitysurvey",
       "versionCode": 1
     },
     "web": {
