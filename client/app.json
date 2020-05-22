@@ -11,7 +11,7 @@
     "orientation": "portrait",
     "icon": "./assets/img/icicLogo.png",
     "splash": {
-      "image": "./assets/icicLogo.png",
+      "image": "./assets/img/icicLogo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

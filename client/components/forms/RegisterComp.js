@@ -164,18 +164,18 @@ class RegisterComp extends Component {
             errors += 'Gender, ';
         if (age === '')
             errors += 'Age, ';
-        // if (race === '')
-        //     errors += 'Race, ';
-        // if (ethnicity === '')
-        //     errors += 'Ethnicity, ';
+        if (race === '')
+            errors += 'Race, ';
+        if (ethnicity === '')
+            errors += 'Ethnicity, ';
         if (profession === '')
             errors += 'Profession, ';
-        // if (marital === '')
-        //     errors += 'Marital, ';
-        // if (income === '')
-        //     errors += 'Income, ';
-        // if (medical === '')
-        //     errors += 'Medical, ';
+        if (marital === '')
+            errors += 'Marital, ';
+        if (income === '')
+            errors += 'Income, ';
+        if (medical === '')
+            errors += 'Medical, ';
 
         if (errors === ''){
             return true;
