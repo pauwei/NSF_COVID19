@@ -53,6 +53,10 @@ export default class PushNotification extends Component {
     this.setState({ notification: notification });
   };
 
+  empty = async() => {
+    this.props.navigation.navigate("gpsPage");
+  }
+
   onSubmit = async() => {
     //this._enableNotification();
     let result = await Permissions.askAsync(Permissions.NOTIFICATIONS);
@@ -459,6 +463,10 @@ export default class PushNotification extends Component {
             </View>
             <TouchableOpacity onPress={this.onSubmit} style={styles.button}>
               <Text style={styles.buttonText}>Enable Push Notifications</Text>
+            </TouchableOpacity>
+            <View style={{ flex: 0.1, alignItems: 'center', }}></View>
+            <TouchableOpacity onPress={this.empty} style={styles.button}>
+              <Text style={styles.buttonText}>Not enable Push Notifications</Text>
             </TouchableOpacity>
           </View>
         );
