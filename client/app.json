@@ -32,10 +32,11 @@
         "UIBackgroundModes": [
           "location",
           "fetch"
-        ],
-        "NSLocationWhenInUseUsageDescription": "Allow this app to use your location.",
-        "NSLocationAlwaysAndWhenInUseUsageDescription": "Allow this app to use your location.",
-        "NSLocationAlwaysUsageDescription": "Allow this app to use your location."
+        ]
+        // ,
+        // "NSLocationWhenInUseUsageDescription": "Allow this app to use your location.",
+        // "NSLocationAlwaysAndWhenInUseUsageDescription": "Allow this app to use your location.",
+        // "NSLocationAlwaysUsageDescription": "Allow this app to use your location."
       }
     },
     "android": {
