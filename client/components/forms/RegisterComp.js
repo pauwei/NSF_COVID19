@@ -306,7 +306,7 @@ class RegisterComp extends Component {
                         </View>
                         <View style={{ padding: 5 }} >
                         <Dropdown
-                                label='Hispanic, Latino or Spanish origin'
+                                label='Hispanic, Latino or Spanish origin (Optional)'
                                 data={race}
                                 value={this.state.race}
                                 onChangeText={race => this.setState({ race })}
@@ -314,7 +314,7 @@ class RegisterComp extends Component {
                         </View>
                         <View style={{ padding: 5 }} >
                         <Dropdown
-                                label='Ethnicity'
+                                label='Ethnicity (Optional)'
                                 data={ethnicity}
                                 value={this.state.ethnicity}
                                 onChangeText={ethnicity => this.setState({ ethnicity })}
@@ -331,7 +331,7 @@ class RegisterComp extends Component {
                        
                         <View style={{ padding: 5 }} >
                         <Dropdown
-                                label='Marital status'
+                                label='Marital status (Optional)'
                                 data={marital}
                                 value={this.state.marital}
                                 onChangeText={marital =>this.setState({ marital })}
@@ -339,7 +339,7 @@ class RegisterComp extends Component {
                         </View>
                         <View style={{ padding: 5 }} >
                         <Dropdown
-                                label='Household Income Range'
+                                label='Household Income Range (Optional)'
                                 data={income}
                                 value={this.state.income}
                                 onChangeText={income => this.setState({ income })}
@@ -347,7 +347,7 @@ class RegisterComp extends Component {
                         </View>
                         <View style={{ padding: 5 }} >
                         <Dropdown
-                                label='Do you have any medical condition?'
+                                label='Do you have any medical condition? (Optional)'
                                 data={medical}
                                 value={this.state.medical}
                                 onChangeText={medical => this.setState({ medical })}

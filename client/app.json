@@ -32,7 +32,9 @@
         "UIBackgroundModes": [
           "location",
           "fetch"
-        ]
+        ],
+        "kCLAuthorizationStatusAuthorizedAlways": "You location data will be used to research what locations are popular in a city. Sharing location during this survey study to be eligible to receive the $30 award.",
+        "NSLocationUsageDescription": "You location data will be used to research what locations are popular in a city. Sharing location during this survey study to be eligible to receive the $30 award."
       }
     },
     "android": {
