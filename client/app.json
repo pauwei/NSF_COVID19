@@ -7,7 +7,7 @@
       "android",
       "web"
     ],
-    "version": "1.2.2",
+    "version": "1.2.4",
     "orientation": "portrait",
     "icon": "./assets/img/icicLogo.png",
     "splash": {
@@ -26,7 +26,7 @@
     ],
     "ios": {
       "bundleIdentifier": "com.iciclab.mobilesurvey",
-      "buildNumber": "1.2.2",
+      "buildNumber": "1.2.4",
       "supportsTablet": true,
       "infoPlist": {
         "UIBackgroundModes": [
