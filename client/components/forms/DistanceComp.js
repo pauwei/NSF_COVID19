@@ -51,6 +51,7 @@ export default class Distance extends React.Component {
                 let time = new Date()
                 let hour = time.getHours()
                 let minutes = time.getMinutes()
+
                 if (hour==0 & minutes<15){distance = 0}
                 await AsyncStorage.setItem('distanceS', JSON.stringify(distance))
                 //   this.setState({distance: distance})
@@ -89,13 +90,14 @@ export default class Distance extends React.Component {
 
     render() {
         let text = '';
-        if (this.state.distance) {
-			text = this.state.distance;
-        } else if(this.state.distance == null) {
-            text = '0'
-        } else {
-        text = '0'
-        }
+        text = parseInt(this.state.distance)|| 0
+        // if (this.state.distance) {ss
+		// 	text = this.state.distance;
+        // } else if(this.state.distance == null) {
+        //     text = '0'
+        // } else {
+        // text = '0'
+        // }
 
         return (
             <View style={styles.container}>
@@ -115,9 +117,14 @@ export default class Distance extends React.Component {
                         {JSON.stringify(this.state.curlocation2)}
                         {JSON.stringify(this.state.errorMessage)} */}
                     </Text>
+                    <View 
+                    style={{ alignItems: 'center', }}
+                    >
                     <Badge status="success"
+                    size = {80}
                     containerStyle={{ position: 'absolute', top: -4, right: -4 }}
-                    style={[styles.numText]}>{JSON.stringify(Math.round(text))}{'m'}</Badge>
+                    style={[styles.numText]}>{text}{'m'}</Badge>
+                    </View>
                 </View>
 
             </View>
