@@ -7,7 +7,7 @@
       "android",
       "web"
     ],
-    "version": "1.2.3",
+    "version": "1.2.7",
     "orientation": "portrait",
     "icon": "./assets/img/icicLogo.png",
     "splash": {
@@ -26,16 +26,17 @@
     ],
     "ios": {
       "bundleIdentifier": "com.iciclab.mobilesurvey",
-      "buildNumber": "1.2.3",
+      "buildNumber": "1.2.7",
       "supportsTablet": true,
       "infoPlist": {
         "UIBackgroundModes": [
           "location",
           "fetch"
         ],
-        "NSLocationWhenInUseUsageDescription": "Allow this app to use your location.",
-        "NSLocationAlwaysAndWhenInUseUsageDescription": "Allow this app to use your location.",
-        "NSLocationAlwaysUsageDescription": "Allow this app to use your location."
+        "kCLAuthorizationStatusAuthorizedAlways": "You location data will be used to research what locations are popular in a city. Sharing location during this survey study to be eligible to receive the $30 award.",
+        "NSLocationWhenInUseUsageDescription": "You location data will be used to research what locations are popular in a city. Sharing location during this survey study to be eligible to receive the $30 award.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "You location data will be used to research what locations are popular in a city. Sharing location during this survey study to be eligible to receive the $30 award.",
+        "NSLocationUsageDescription": "You location data will be used to research what locations are popular in a city. Sharing location during this survey study to be eligible to receive the $30 award."
       }
     },
     "android": {

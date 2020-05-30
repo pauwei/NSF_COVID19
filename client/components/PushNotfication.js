@@ -466,7 +466,7 @@ export default class PushNotification extends Component {
             </TouchableOpacity>
             <View style={{ flex: 0.1, alignItems: 'center', }}></View>
             <TouchableOpacity onPress={this.empty} style={styles.button}>
-              <Text style={styles.buttonText}>Not enable Push Notifications</Text>
+              <Text style={styles.buttonText}>Do not enable Push Notifications</Text>
             </TouchableOpacity>
           </View>
         );

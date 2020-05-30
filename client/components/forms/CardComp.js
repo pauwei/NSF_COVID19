@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
+import { Avatar, Button, Card, Title, Paragraph, Text, AsyncStorage, Badge } from 'react-native-paper';
 import {  ScrollView } from 'react-native';
 const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
-
+import GPS from '../gps-tracking'
 
 const CardComp = () => (
   <ScrollView  >
@@ -17,6 +17,7 @@ const CardComp = () => (
           resizeMode: 'contain',
           // height: null 
            }}/>
+
       <Paragraph >Thank you for participating in the urban mobility survey. We will occasionally ask your opinions about outdoor trips in the next three months. 
         Your answers will help us better investigate urban mobility. Your identity and answers will be completely anonymous and for research only. 
         Data will not be shared with anybody or parties other than the research team at University of Florida. This research is supported by National Science Foundation (NSF). 
