@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Text, View, StyleSheet, AsyncStorage } from 'react-native';
+import { TouchableOpacity, Text, View, StyleSheet, AsyncStorage, Button } from 'react-native';
 import * as Location from 'expo-location';
 import * as TaskManager from 'expo-task-manager';
 import * as BackgroundFetch from 'expo-background-fetch';
@@ -23,6 +23,16 @@ const firebaseConfig = {
 };
 
 export default class GPS extends React.Component {
+    
+    state = {
+        location: {},
+        distance: {},
+        curlocation1: {},
+        curlocation2: {},
+        errorMessage: '',
+        time: {},
+    }
+
     constructor() {
         super();
         console.ignoredYellowBox = [ 'Setting a timer' ];
@@ -82,8 +92,8 @@ export default class GPS extends React.Component {
                 } else {
                     await Location.startLocationUpdatesAsync(LOCATION_TASK_NAME, {
                         accuracy: Location.Accuracy.Balanced,
-                        timeInterval: 5 * 60 * 1000, //Every five minutes
-                        deferredUpdatesInterval: 5 * 60 * 1000, //Every five minutes
+                        timeInterval: 0.01 * 60 * 1000, //Every five minutes
+                        deferredUpdatesInterval: 0.01 * 60 * 1000, //Every five minutes
                         foregroundService: {
                             notificationTitle: "GPS Tracking",
                             notificationBody: "Your Location is being tracked for research app"
@@ -126,8 +136,87 @@ export default class GPS extends React.Component {
             }
         }
     }
+    
+    _getcurrentlocation = async() => {
+        const location = await Location.getCurrentPositionAsync();
+        if (location){
+            this.setState({location: location})
+            await AsyncStorage.setItem('locationS', JSON.stringify(location))
+            let errorMessage = 'Got location data'
+            this.setState({errorMessage: errorMessage})
+            await AsyncStorage.setItem('errorMessageS', JSON.stringify(errorMessage))
+
+            await AsyncStorage.setItem('curlocation1altitude', JSON.stringify(location.coords.latitude))
+            await AsyncStorage.setItem('curlocation1longitude', JSON.stringify(location.coords.longitude))
+            // await AsyncStorage.setItem('curlocation1altitude', JSON.stringify(locations.lat))
+            // await AsyncStorage.setItem('curlocation1longitude', JSON.stringify(locations.long))
+            const curlocation1lat = await AsyncStorage.getItem('curlocation1altitude')
+            const curlocation1long = await AsyncStorage.getItem('curlocation1longitude')
+            let curlocation1latF = parseFloat(curlocation1lat)
+            let curlocation1longF = parseFloat(curlocation1long)
+      
+            const curlocation2lat = await AsyncStorage.getItem('curlocation2altitude')
+            const curlocation2long = await AsyncStorage.getItem('curlocation2longitude')
+            let curlocation2latF = parseFloat(curlocation2lat)
+            let curlocation2longF = parseFloat(curlocation2long)
+            ////////////////////////////////////
+            if (curlocation2latF){
+                const distanceold = await AsyncStorage.getItem('distanceS')
+                let distance = parseFloat(distanceold) + 6378.137 * 1000 * Math.abs(Math.acos(
+                Math.cos(curlocation1latF*Math.PI/180)*
+                Math.cos(curlocation2latF*Math.PI/180)*
+                Math.cos((curlocation2longF-curlocation1longF)*Math.PI/180)+
+                Math.sin(curlocation1latF*Math.PI/180)*
+                Math.sin(curlocation2latF*Math.PI/180)));
+
+                let time = new Date()
+                let hour = time.getHours()
+                let minutes = time.getMinutes()
+                if (hour==0 & minutes<15){distance = 0}
+                await AsyncStorage.setItem('distanceS', JSON.stringify(distance))
+                //   this.setState({distance: distance})
+                // this.setState({time: minutes})
+
+            }
+            //////////////////////////////////////
+            await AsyncStorage.setItem('curlocation2altitude', JSON.stringify(location.coords.latitude))
+            await AsyncStorage.setItem('curlocation2longitude', JSON.stringify(location.coords.longitude))
+            // await AsyncStorage.setItem('curlocation2altitude', JSON.stringify(locations.lat))
+            // await AsyncStorage.setItem('curlocation2longitude', JSON.stringify(locations.long))
+            this._showdistance()
+        }
+        else {
+            let errorMessage = 'No location data'
+            this.setState({errorMessage: errorMessage})
+            await AsyncStorage.setItem('errorMessageS', JSON.stringify(errorMessage))
+
+        }
+        // return {distance}
+    }
+
+    _showdistance = async() => {
+        const location = await AsyncStorage.getItem('locationS');
+        const distance = await AsyncStorage.getItem('distanceS');
+        const curlocation1 = await AsyncStorage.getItem('curlocation1altitude');
+        const curlocation2 = await AsyncStorage.getItem('curlocation2altitude');
+        const errorMessage = await AsyncStorage.getItem('errorMessageS');
+        // let distanceF = parseFloat(distance)
+        this.setState({location: location})
+        this.setState({distance: distance})
+        this.setState({curlocation1})
+        this.setState({curlocation2})
+        this.setState({errorMessage: errorMessage})
+    }
 
     render() {
+        let text = '';
+		if (this.state.distance) {
+			text = JSON.stringify(this.state.distance);
+		} else if (this.state.curlocation1) {
+			text = JSON.stringify(this.state.curlocation1);
+        } else {
+        text = 'No location data.'
+        }
         return (
             <View style={styles.container}>
                 <View style={[styles.infoContainer]}>
@@ -135,6 +224,16 @@ export default class GPS extends React.Component {
                         For the purposes of this research, your location while participating in the survey will need to be enabled. 
                         The information will be for research modeling only and is completely anonymous. Your personal data will not be shared with anybody or parties. 
                         Click on the enable background location button below to enable gps tracking.{"\n\n"}
+                    </Text>
+                    {/* <Button title="Distance." onPress={this._getcurrentlocation} /> */}
+                    {/* <Button title="Distance." onPress={this._showdistance} /> */}
+                    <Text>
+                        {/* {JSON.stringify(this.state.location)} */}
+                        {/* {JSON.stringify(this.state.distance)} */}
+                        {/* {JSON.stringify(this.state.time)} */}
+                        {/* {JSON.stringify(this.state.curlocation1)}
+                        {JSON.stringify(this.state.curlocation2)}
+                        {JSON.stringify(this.state.errorMessage)} */}
                     </Text>
                 </View>
                 <TouchableOpacity onPress={this.onPress} style={styles.button}>
@@ -202,6 +301,60 @@ TaskManager.defineTask(LOCATION_TASK_NAME, async ({ data, error }) => {
             spd = currentLocation.coords.speed;         //instantaneous speed of the devie in meters per second
             acc = currentLocation.coords.accuracy;      //radius of uncertainity for location, measured in meters
         });
+        
+
+        if (currentLocation){
+            // this.setState({location: currentLocation})
+            await AsyncStorage.setItem('locationS', JSON.stringify(currentLocation))
+            let errorMessage = 'Got location data'
+            // this.setState({errorMessage: errorMessage})
+            await AsyncStorage.setItem('errorMessageS', JSON.stringify(errorMessage))
+
+            await AsyncStorage.setItem('curlocation1altitude', JSON.stringify(currentLocation.coords.latitude))
+            await AsyncStorage.setItem('curlocation1longitude', JSON.stringify(currentLocation.coords.longitude))
+            // await AsyncStorage.setItem('curlocation1altitude', JSON.stringify(locations.lat))
+            // await AsyncStorage.setItem('curlocation1longitude', JSON.stringify(locations.long))
+            const curlocation1lat = await AsyncStorage.getItem('curlocation1altitude')
+            const curlocation1long = await AsyncStorage.getItem('curlocation1longitude')
+            let curlocation1latF = parseFloat(curlocation1lat)
+            let curlocation1longF = parseFloat(curlocation1long)
+        
+            const curlocation2lat = await AsyncStorage.getItem('curlocation2altitude')
+            const curlocation2long = await AsyncStorage.getItem('curlocation2longitude')
+            let curlocation2latF = parseFloat(curlocation2lat)
+            let curlocation2longF = parseFloat(curlocation2long)
+            ////////////////////////////////////
+            if (curlocation2latF){
+                const distanceold = await AsyncStorage.getItem('distanceS')
+                let distance = parseFloat(distanceold) + 6378.137 * 1000 * Math.abs(Math.acos(
+                Math.cos(curlocation1latF*Math.PI/180)*
+                Math.cos(curlocation2latF*Math.PI/180)*
+                Math.cos((curlocation2longF-curlocation1longF)*Math.PI/180)+
+                Math.sin(curlocation1latF*Math.PI/180)*
+                Math.sin(curlocation2latF*Math.PI/180)));
+
+                let time = new Date()
+                let hour = time.getHours()
+                let minutes = time.getMinutes()
+                if (hour==0 & minutes<15){distance = 0}
+                await AsyncStorage.setItem('distanceS', JSON.stringify(distance))
+            //   this.setState({distance: distance})
+            }
+            //////////////////////////////////////
+            await AsyncStorage.setItem('curlocation2altitude', JSON.stringify(currentLocation.coords.latitude))
+            await AsyncStorage.setItem('curlocation2longitude', JSON.stringify(currentLocation.coords.longitude))
+            // await AsyncStorage.setItem('curlocation2altitude', JSON.stringify(locations.lat))
+            // await AsyncStorage.setItem('curlocation2longitude', JSON.stringify(locations.long))
+            // this._showdistance()
+        }
+        else {
+            let errorMessage = 'No location data'
+            // this.setState({errorMessage: errorMessage})
+            await AsyncStorage.setItem('errorMessageS', JSON.stringify(errorMessage))
+
+        }
+
+
 
         //See if firebase is initialized
         if (!firebase.apps.length){

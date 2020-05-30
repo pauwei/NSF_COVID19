@@ -3,6 +3,7 @@ import { BottomNavigation, Text } from 'react-native-paper';
 import CardComp from './forms/CardComp'
 import InfoMapComp from './forms/InfoMapComp'
 import WebComp from './forms/WebComp'
+import DistanceComp from './forms/DistanceComp'
 // import LoginComp from './forms/LoginComp'
 
 const MusicRoute = () => <Text>Music</Text>;
@@ -22,6 +23,7 @@ export default class BottomNaviComp extends React.Component {
       { key: 'info', title: 'Instruction', icon: 'home' },
       { key: 'survey', title: 'Survey', icon: 'file-question' },
       { key: 'map', title: 'Contact', icon: 'information' },
+      { key: 'distance', title: 'Daily Movements', icon: 'heart' },
     ],
   };
 
@@ -31,6 +33,7 @@ export default class BottomNaviComp extends React.Component {
     info: CardComp,
     survey: WebComp,
     map: InfoMapComp,
+    distance: DistanceComp,
   });
 
   render() {
