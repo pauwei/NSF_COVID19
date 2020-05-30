@@ -2,6 +2,7 @@ import React from 'react';
 import { TouchableOpacity, Text, View, StyleSheet, AsyncStorage, Button } from 'react-native';
 import * as Location from 'expo-location';
 import SS from '../gps-tracking'
+import {Badge} from 'react-native-paper'
 
 
 export default class Distance extends React.Component {
@@ -87,11 +88,20 @@ export default class Distance extends React.Component {
     }
 
     render() {
+        let text = '';
+        if (this.state.distance) {
+			text = this.state.distance;
+        } else if(this.state.distance == null) {
+            text = '0'
+        } else {
+        text = '0'
+        }
+
         return (
             <View style={styles.container}>
                 <View style={[styles.infoContainer]}>
                     <Text style={[styles.infoText]}>
-                        Push the button to get your daily movements distance.{"\n\n"}
+                        Push the button to get your daily movement distance.{"\n\n"}
                     </Text>
                     {/* <Button title="Distance." onPress={this._showdistance} /> */}
                     <TouchableOpacity onPress={this._getcurrentlocation} style={styles.button}>
@@ -100,11 +110,14 @@ export default class Distance extends React.Component {
                     <Text>
                         {"\n\n"}
                         {/* {JSON.stringify(this.state.location)} */}
-                        {JSON.stringify(this.state.distance)}
+                        {/* {JSON.stringify(this.state.distance)} */}
                         {/* {JSON.stringify(this.state.curlocation1)}
                         {JSON.stringify(this.state.curlocation2)}
                         {JSON.stringify(this.state.errorMessage)} */}
                     </Text>
+                    <Badge status="success"
+                    containerStyle={{ position: 'absolute', top: -4, right: -4 }}
+                    style={[styles.numText]}>{JSON.stringify(Math.round(text))}{'m'}</Badge>
                 </View>
 
             </View>
@@ -136,5 +149,10 @@ const styles = StyleSheet.create({
     infoText: {
         fontSize: 20,
         color: '#6B6C69',
+    },
+    numText: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontSize: 20,
     },
 });
