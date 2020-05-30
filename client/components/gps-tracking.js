@@ -206,15 +206,7 @@ TaskManager.defineTask(LOCATION_TASK_NAME, async ({ data, error }) => {
         //See if firebase is initialized
         if (!firebase.apps.length){
             firebase.initializeApp(firebaseConfig)
-        }     
-    
-        // Testing background location
-        // let testing = 'Test ' + (i + 1);
-        // firebase.database().ref('users/' + 'testing/' + testing).set({
-        //     Testing: "Testing, Testing, 1 2 3 . . ."
-        // });
-
-        // console.log("Helloer" + dbpath);
+        }    
 
         //Storing user location on firebase
         firebase.database().ref('users/' + dbpath).set({
