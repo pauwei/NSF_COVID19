@@ -82,7 +82,8 @@ export default class GPS extends React.Component {
                 } else {
                     await Location.startLocationUpdatesAsync(LOCATION_TASK_NAME, {
                         accuracy: Location.Accuracy.Balanced,
-                        timeInterval: 300000, //Every five minuts
+                        timeInterval: 5 * 60 * 1000, //Every five minutes
+                        deferredUpdatesInterval: 5 * 60 * 1000, //Every five minutes
                         foregroundService: {
                             notificationTitle: "GPS Tracking",
                             notificationBody: "Your Location is being tracked for research app"
