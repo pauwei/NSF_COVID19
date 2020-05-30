@@ -23,7 +23,7 @@ export default class BottomNaviComp extends React.Component {
       { key: 'info', title: 'Instruction', icon: 'home' },
       { key: 'survey', title: 'Survey', icon: 'file-question' },
       { key: 'map', title: 'Contact', icon: 'information' },
-      { key: 'distance', title: 'Daily Movements', icon: 'heart' },
+      { key: 'distance', title: 'Movement', icon: 'heart' },
     ],
   };
 
