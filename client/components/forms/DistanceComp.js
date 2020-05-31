@@ -109,7 +109,7 @@ export default class Distance extends React.Component {
                     <Text>
                         {"\n\n"}
                         {/* {JSON.stringify(this.state.location)} */}
-                        {/* {JSON.stringify(this.state.distance)} */}
+                        {JSON.stringify(this.state.distance)}
                         {/* {JSON.stringify(this.state.curlocation1)}
                         {JSON.stringify(this.state.curlocation2)}
                         {JSON.stringify(this.state.errorMessage)} */}
