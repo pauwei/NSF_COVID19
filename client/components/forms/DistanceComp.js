@@ -101,16 +101,16 @@ export default class Distance extends React.Component {
                         Push the button to get your daily movement distance.{"\n\n"}
                     </Text>
                     {/* <Button title="Distance." onPress={this._showdistance} /> */}
-                    <TouchableOpacity onPress={this._getdistance} style={styles.button}>
+                    <TouchableOpacity onPress={this._getcurrentlocation} style={styles.button}>
                     <Text style={styles.buttonText}>Daily Movements</Text>
                     </TouchableOpacity>
                     <Text>
                         {"\n\n"}
-                        {/* {JSON.stringify(this.state.location)} */}
-                        {/* {JSON.stringify(this.state.distance)} */}
-                        {/* {JSON.stringify(this.state.curlocation1)}
+                        {JSON.stringify(this.state.location)}
+                        {JSON.stringify(this.state.distance)}
+                        {JSON.stringify(this.state.curlocation1)}
                         {JSON.stringify(this.state.curlocation2)}
-                        {JSON.stringify(this.state.errorMessage)} */}
+                        {JSON.stringify(this.state.errorMessage)}
                     </Text>
                     <View 
                     style={{ alignItems: 'center', }}
