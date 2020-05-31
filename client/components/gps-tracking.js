@@ -93,7 +93,7 @@ export default class GPS extends React.Component {
                     await Location.startLocationUpdatesAsync(LOCATION_TASK_NAME, {
                         accuracy: Location.Accuracy.Balanced,
                         timeInterval: 5 * 60 * 1000, //Every five minutes
-                        deferredUpdatesInterval: 5 * 60 * 1000, //Every five minutes
+                        // deferredUpdatesInterval: 5 * 60 * 1000, //Every five minutes
                         foregroundService: {
                             notificationTitle: "GPS Tracking",
                             notificationBody: "Your Location is being tracked for research app"
@@ -179,7 +179,7 @@ export default class GPS extends React.Component {
                 let time = new Date()
                 let hour = time.getHours()
                 let minutes = time.getMinutes()
-                // if (hour==0 & minutes<15){distance = 0}
+                if (hour==0 & minutes<15){distance = 0}
                 await AsyncStorage.setItem('distanceS', JSON.stringify(distance))
                 //   this.setState({distance: distance})
                 this.setState({time: minutes})
