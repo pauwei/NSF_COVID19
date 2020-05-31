@@ -101,7 +101,7 @@ export default class Distance extends React.Component {
                         Push the button to get your daily movement distance.{"\n\n"}
                     </Text>
                     {/* <Button title="Distance." onPress={this._showdistance} /> */}
-                    <TouchableOpacity onPress={this._getcurrentlocation} style={styles.button}>
+                    <TouchableOpacity onPress={this._getdistance} style={styles.button}>
                     <Text style={styles.buttonText}>Daily Movements</Text>
                     </TouchableOpacity>
                     <Text>

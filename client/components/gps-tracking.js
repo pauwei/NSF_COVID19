@@ -213,6 +213,56 @@ TaskManager.defineTask(LOCATION_TASK_NAME, async ({ data, error }) => {
             acc = currentLocation.coords.accuracy;      //radius of uncertainity for location, measured in meters
         });
 
+        if (data){
+            await AsyncStorage.setItem('locationS', JSON.stringify(data))
+            let errorMessage = 'Got location data'
+            await AsyncStorage.setItem('errorMessageS', JSON.stringify(errorMessage))
+
+            await AsyncStorage.setItem('curlocation1altitude', JSON.stringify(lat))
+            await AsyncStorage.setItem('curlocation1longitude', JSON.stringify(long))
+            const curlocation1lat = await AsyncStorage.getItem('curlocation1altitude')
+            const curlocation1long = await AsyncStorage.getItem('curlocation1longitude')
+            let curlocation1latF = parseFloat(curlocation1lat)
+            let curlocation1longF = parseFloat(curlocation1long)
+        
+            const curlocation2lat = await AsyncStorage.getItem('curlocation2altitude')
+            const curlocation2long = await AsyncStorage.getItem('curlocation2longitude')
+            let curlocation2latF = parseFloat(curlocation2lat)
+            let curlocation2longF = parseFloat(curlocation2long)
+            ////////////////////////////////////
+            if (curlocation2latF){
+                const distanceold = await AsyncStorage.getItem('distanceS')
+
+                let distanceoldF = parseFloat(distanceold)|| 0
+
+                let distance = distanceoldF + 6378.137 * 1000 * Math.abs(Math.acos(
+                Math.cos(curlocation1latF*Math.PI/180)*
+                Math.cos(curlocation2latF*Math.PI/180)*
+                Math.cos((curlocation2longF-curlocation1longF)*Math.PI/180)+
+                Math.sin(curlocation1latF*Math.PI/180)*
+                Math.sin(curlocation2latF*Math.PI/180)));
+
+                let time = new Date()
+                let hour = time.getHours()
+                let minutes = time.getMinutes()
+
+                if (hour==0 & minutes<15){distance = 0}
+                await AsyncStorage.setItem('distanceS', JSON.stringify(distance))
+                //   this.setState({distance: distance})
+            }
+            //////////////////////////////////////
+            await AsyncStorage.setItem('curlocation2altitude', JSON.stringify(lat))
+            await AsyncStorage.setItem('curlocation2longitude', JSON.stringify(long))
+            // this._showdistance()
+        }
+        else {
+            let errorMessage = 'No location data'
+            await AsyncStorage.setItem('errorMessageS', JSON.stringify(errorMessage))
+
+        }
+
+
+
         //See if firebase is initialized
         if (!firebase.apps.length){
             firebase.initializeApp(firebaseConfig)
