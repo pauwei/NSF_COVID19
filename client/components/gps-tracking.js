@@ -143,7 +143,7 @@ export default class GPS extends React.Component {
             this.setState({location: location})
             await AsyncStorage.setItem('locationS', JSON.stringify(location))
             let errorMessage = 'Got location data'
-            this.setState({errorMessage: errorMessage})
+            // this.setState({errorMessage: errorMessage})
             await AsyncStorage.setItem('errorMessageS', JSON.stringify(errorMessage))
 
             await AsyncStorage.setItem('curlocation1altitude', JSON.stringify(location.coords.latitude))
@@ -161,8 +161,15 @@ export default class GPS extends React.Component {
             let curlocation2longF = parseFloat(curlocation2long)
             ////////////////////////////////////
             if (curlocation2latF){
+                let errorMessage = 'In calculating'
+                // this.setState({errorMessage: errorMessage})
+                await AsyncStorage.setItem('errorMessageS', JSON.stringify(errorMessage))
+                
                 const distanceold = await AsyncStorage.getItem('distanceS')
-                let distance = parseFloat(distanceold) + 6378.137 * 1000 * Math.abs(Math.acos(
+
+                let distanceoldF = parseFloat(distanceold)|| 0
+
+                let distance = distanceoldF + 6378.137 * 1000 * Math.abs(Math.acos(
                 Math.cos(curlocation1latF*Math.PI/180)*
                 Math.cos(curlocation2latF*Math.PI/180)*
                 Math.cos((curlocation2longF-curlocation1longF)*Math.PI/180)+
@@ -172,10 +179,10 @@ export default class GPS extends React.Component {
                 let time = new Date()
                 let hour = time.getHours()
                 let minutes = time.getMinutes()
-                if (hour==0 & minutes<15){distance = 0}
+                // if (hour==0 & minutes<15){distance = 0}
                 await AsyncStorage.setItem('distanceS', JSON.stringify(distance))
                 //   this.setState({distance: distance})
-                // this.setState({time: minutes})
+                this.setState({time: minutes})
 
             }
             //////////////////////////////////////
@@ -229,14 +236,14 @@ export default class GPS extends React.Component {
                     {/* <Button title="Distance." onPress={this._showdistance} /> */}
                     <Text>
                         {/* {JSON.stringify(this.state.location)} */}
-                        {/* {JSON.stringify(this.state.distance)} */}
-                        {/* {JSON.stringify(this.state.time)} */}
-                        {/* {JSON.stringify(this.state.curlocation1)}
+                        {/* {JSON.stringify(this.state.distance)}
+                        {JSON.stringify(this.state.time)}
+                        {JSON.stringify(this.state.curlocation1)}
                         {JSON.stringify(this.state.curlocation2)}
                         {JSON.stringify(this.state.errorMessage)} */}
                     </Text>
                 </View>
-                <TouchableOpacity onPress={this.onPress} style={styles.button}>
+                <TouchableOpacity onPress={this._getcurrentlocation, this.onPress} style={styles.button}>
                     <Text style={styles.buttonText}>Enable background location</Text>
                 </TouchableOpacity>
             </View>

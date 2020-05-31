@@ -41,7 +41,10 @@ export default class Distance extends React.Component {
             ////////////////////////////////////
             if (curlocation2latF){
                 const distanceold = await AsyncStorage.getItem('distanceS')
-                let distance = parseFloat(distanceold) + 6378.137 * 1000 * Math.abs(Math.acos(
+
+                let distanceoldF = parseFloat(distanceold)|| 0
+
+                let distance = distanceoldF + 6378.137 * 1000 * Math.abs(Math.acos(
                 Math.cos(curlocation1latF*Math.PI/180)*
                 Math.cos(curlocation2latF*Math.PI/180)*
                 Math.cos((curlocation2longF-curlocation1longF)*Math.PI/180)+
@@ -91,13 +94,7 @@ export default class Distance extends React.Component {
     render() {
         let text = '';
         text = parseInt(this.state.distance)|| 0
-        // if (this.state.distance) {ss
-		// 	text = this.state.distance;
-        // } else if(this.state.distance == null) {
-        //     text = '0'
-        // } else {
-        // text = '0'
-        // }
+        // text = parseFloat(this.state.distance)|| 0
 
         return (
             <View style={styles.container}>
