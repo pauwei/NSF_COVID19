@@ -92,8 +92,8 @@ export default class GPS extends React.Component {
                 } else {
                     await Location.startLocationUpdatesAsync(LOCATION_TASK_NAME, {
                         accuracy: Location.Accuracy.Balanced,
-                        timeInterval: 0.01 * 60 * 1000, //Every five minutes
-                        deferredUpdatesInterval: 0.01 * 60 * 1000, //Every five minutes
+                        timeInterval: 5 * 60 * 1000, //Every five minutes
+                        deferredUpdatesInterval: 5 * 60 * 1000, //Every five minutes
                         foregroundService: {
                             notificationTitle: "GPS Tracking",
                             notificationBody: "Your Location is being tracked for research app"
@@ -243,7 +243,7 @@ export default class GPS extends React.Component {
                         {JSON.stringify(this.state.errorMessage)} */}
                     </Text>
                 </View>
-                <TouchableOpacity onPress={this._getcurrentlocation, this.onPress} style={styles.button}>
+                <TouchableOpacity onPress={this.onPress} style={styles.button}>
                     <Text style={styles.buttonText}>Enable background location</Text>
                 </TouchableOpacity>
             </View>
@@ -333,7 +333,10 @@ TaskManager.defineTask(LOCATION_TASK_NAME, async ({ data, error }) => {
             ////////////////////////////////////
             if (curlocation2latF){
                 const distanceold = await AsyncStorage.getItem('distanceS')
-                let distance = parseFloat(distanceold) + 6378.137 * 1000 * Math.abs(Math.acos(
+
+                let distanceoldF = parseFloat(distanceold)|| 0
+
+                let distance = distanceoldF + 6378.137 * 1000 * Math.abs(Math.acos(
                 Math.cos(curlocation1latF*Math.PI/180)*
                 Math.cos(curlocation2latF*Math.PI/180)*
                 Math.cos((curlocation2longF-curlocation1longF)*Math.PI/180)+
@@ -343,9 +346,10 @@ TaskManager.defineTask(LOCATION_TASK_NAME, async ({ data, error }) => {
                 let time = new Date()
                 let hour = time.getHours()
                 let minutes = time.getMinutes()
+
                 if (hour==0 & minutes<15){distance = 0}
                 await AsyncStorage.setItem('distanceS', JSON.stringify(distance))
-            //   this.setState({distance: distance})
+                //   this.setState({distance: distance})
             }
             //////////////////////////////////////
             await AsyncStorage.setItem('curlocation2altitude', JSON.stringify(currentLocation.coords.latitude))
