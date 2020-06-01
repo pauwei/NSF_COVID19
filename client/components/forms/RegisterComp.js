@@ -297,8 +297,8 @@ class RegisterComp extends Component {
                         </View>
                         <View style={{ padding: 5 }} >
                             <TextInput
-                                mode='outlined (Optional)'
-                                label='Age'
+                                mode='outlined'
+                                label='Age (Optional)'
                                 value={this.state.age}
                                 keyboardType="phone-pad"
                                 onChangeText={age => this.setState({ age })}

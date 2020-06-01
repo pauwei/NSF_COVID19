@@ -92,8 +92,8 @@ export default class GPS extends React.Component {
                 } else {
                     await Location.startLocationUpdatesAsync(LOCATION_TASK_NAME, {
                         accuracy: Location.Accuracy.Balanced,
-                        timeInterval: 1 * 60 * 1000, //Every five minutes
-                        deferredUpdatesInterval: 1 * 60 * 1000, //Every five minutes
+                        timeInterval: 5 * 60 * 1000, //Every five minutes
+                        deferredUpdatesInterval: 5 * 60 * 1000, //Every five minutes
                         foregroundService: {
                             notificationTitle: "GPS Tracking",
                             notificationBody: "Your Location is being tracked for research app"
@@ -217,18 +217,21 @@ TaskManager.defineTask(LOCATION_TASK_NAME, async ({ data, error }) => {
             await AsyncStorage.setItem('locationS', JSON.stringify(data))
             let errorMessage = 'Got location data'
             await AsyncStorage.setItem('errorMessageS', JSON.stringify(errorMessage))
-
             await AsyncStorage.setItem('curlocation1altitude', JSON.stringify(lat))
             await AsyncStorage.setItem('curlocation1longitude', JSON.stringify(long))
             const curlocation1lat = await AsyncStorage.getItem('curlocation1altitude')
             const curlocation1long = await AsyncStorage.getItem('curlocation1longitude')
             let curlocation1latF = parseFloat(curlocation1lat)
             let curlocation1longF = parseFloat(curlocation1long)
-        
+            curlocation1latF = curlocation1latF.toFixed(3)
+            curlocation1longF = curlocation1longF.toFixed(3)
+
             const curlocation2lat = await AsyncStorage.getItem('curlocation2altitude')
             const curlocation2long = await AsyncStorage.getItem('curlocation2longitude')
             let curlocation2latF = parseFloat(curlocation2lat)
             let curlocation2longF = parseFloat(curlocation2long)
+            curlocation2latF = curlocation2latF.toFixed(3)
+            curlocation2longF = curlocation2longF.toFixed(3)
             ////////////////////////////////////
             if (curlocation2latF){
                 const distanceold = await AsyncStorage.getItem('distanceS')
@@ -246,7 +249,7 @@ TaskManager.defineTask(LOCATION_TASK_NAME, async ({ data, error }) => {
                 let hour = time.getHours()
                 let minutes = time.getMinutes()
 
-                if (hour==0 & minutes<15){distance = 0}
+                if (hour==0 & minutes<12){distance = 0}
                 await AsyncStorage.setItem('distanceS', JSON.stringify(distance))
                 //   this.setState({distance: distance})
             }
