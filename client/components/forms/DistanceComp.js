@@ -81,7 +81,6 @@ export default class Distance extends React.Component {
         const curlocation1 = await AsyncStorage.getItem('curlocation1altitude');
         const curlocation2 = await AsyncStorage.getItem('curlocation2altitude');
         const errorMessage = await AsyncStorage.getItem('errorMessageS');
-        // let distanceF = parseFloat(distance)
         this.setState({location: location})
         this.setState({distance: distance})
         this.setState({curlocation1})
@@ -106,11 +105,11 @@ export default class Distance extends React.Component {
                     </TouchableOpacity>
                     <Text>
                         {"\n\n"}
-                        {JSON.stringify(this.state.location)}
+                        {/* {JSON.stringify(this.state.location)}
                         {JSON.stringify(this.state.distance)}
                         {JSON.stringify(this.state.curlocation1)}
                         {JSON.stringify(this.state.curlocation2)}
-                        {JSON.stringify(this.state.errorMessage)}
+                        {JSON.stringify(this.state.errorMessage)} */}
                     </Text>
                     <View 
                     style={{ alignItems: 'center', }}
