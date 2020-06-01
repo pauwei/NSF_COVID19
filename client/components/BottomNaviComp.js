@@ -22,7 +22,7 @@ export default class BottomNaviComp extends React.Component {
     routes: [
       { key: 'info', title: 'Instruction', icon: 'home' },
       { key: 'survey', title: 'Survey', icon: 'file-question' },
-      { key: 'map', title: 'Contact', icon: 'information' },
+      // { key: 'map', title: 'Contact', icon: 'information' },
       { key: 'distance', title: 'Movement', icon: 'heart' },
     ],
   };
@@ -32,7 +32,7 @@ export default class BottomNaviComp extends React.Component {
   _renderScene = BottomNavigation.SceneMap({
     info: CardComp,
     survey: WebComp,
-    map: InfoMapComp,
+    // map: InfoMapComp,
     distance: DistanceComp,
   });
 

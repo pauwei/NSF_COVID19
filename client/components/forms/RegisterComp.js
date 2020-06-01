@@ -160,16 +160,16 @@ class RegisterComp extends Component {
             errors += 'Email, ';
         if (password === '')
             errors += 'Password, ';
-        if (gender === '')
-            errors += 'Gender, ';
-        if (age === '')
-            errors += 'Age, ';
+        // if (gender === '')
+        //     errors += 'Gender, ';
+        // if (age === '')
+        //     errors += 'Age, ';
         // if (race === '')
         //     errors += 'Race, ';
         // if (ethnicity === '')
         //     errors += 'Ethnicity, ';
-        if (profession === '')
-            errors += 'Profession, ';
+        // if (profession === '')
+        //     errors += 'Profession, ';
         // if (marital === '')
         //     errors += 'Marital, ';
         // if (income === '')
@@ -289,7 +289,7 @@ class RegisterComp extends Component {
                         </View>
                         <View style={{ padding: 5 }} >
                         <Dropdown
-                                label='Gender'
+                                label='Gender (Optional)'
                                 data={gender}
                                 value={this.state.gender}
                                 onChangeText={gender => this.setState({ gender })}
@@ -297,7 +297,7 @@ class RegisterComp extends Component {
                         </View>
                         <View style={{ padding: 5 }} >
                             <TextInput
-                                mode='outlined'
+                                mode='outlined (Optional)'
                                 label='Age'
                                 value={this.state.age}
                                 keyboardType="phone-pad"
@@ -323,7 +323,7 @@ class RegisterComp extends Component {
                         <View style={{ padding: 5 }} >
                             <TextInput
                                 mode='outlined'
-                                label='Profession'
+                                label='Profession (Optional)'
                                 value={this.state.profession}
                                 onChangeText={profession => this.setState({ profession })}
                             />
