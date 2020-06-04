@@ -26,7 +26,8 @@ const CardComp = () => (
         In the next 90 days, you will receive 30 notifications to complete a short survey (less than 10 minuets). After completing each survey successfully, you will receive one token. 
         After receiving 30 tokens, you will be contacted by us to receive the $30 Amazon Gift card via the registration email. If you have any question please contact us at icicvrufl@gmail.com
         {'\n\n'}
-        Please note, Appe is not the sponsor of this survey study. This survey study is sponsored by National Science Foundation (NSF). All funds for Amazon Gift cards are provided by NSF.
+        Please note, Apple is not involved in any way with this survey study and not the sponsor of this survey study. This survey study is sponsored by National Science Foundation (NSF). 
+        All funds for Amazon Gift cards are provided by NSF.
         </Paragraph>
     </Card.Content>
 
